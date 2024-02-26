@@ -3,7 +3,6 @@ package com.users;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-
 import com.userdetails.*;
 import com.Booking.Book;
 import com.DriverPackage.Colors;
@@ -11,7 +10,22 @@ import com.EventDatabase.BookHall;
 import com.Exceptions.InputInvalidException;
 import com.enums.CATEGORY;
 
+
+/**
+ * The `Users` class represents a user of the Hall Management System.
+ * It provides methods for user registration, login, and accessing user-specific services.
+ */
+
 public class Users {
+	 /**
+     * The main method of the application.
+     * It displays a welcome message and presents options for different user roles.
+     *
+     *
+     * @throws NumberFormatException    if there is an error converting a string to a number
+     * @throws IOException              if there is an I/O error
+     * @throws InputInvalidException    if the user enters an invalid input
+     */
 	
 	private String userID;
 	private String firstName;
@@ -28,11 +42,15 @@ public class Users {
 		
 	}
 	
-//	public Users(String category) {
-//		this.setCategory(category);
-//	}
-//	
-	
+	 /**
+     * Constructor for creating a new user with the specified user ID, password, and category.
+     * This constructor is typically used for logging in an existing user.
+     *
+     * @param userID   The user ID of the user
+     * @param password The password of the user
+     * @param category The category of the user (e.g., ADMIN, CUSTOMER, HALLOWNER)
+     * @throws SQLException if there is an error in the SQL query
+     */
 	public Users(String userID,String password,String category) throws SQLException {
 		this.setUserID(userID);
 		this.setPassword(password);
@@ -41,7 +59,19 @@ public class Users {
 //		new BookHall(user);
 		this.Service();
 	}
-	
+	  /**
+     * Constructor for creating a new user with the specified details.
+     *
+     * @param userID      The user ID of the user
+     * @param firstName   The first name of the user
+     * @param lastName    The last name of the user
+     * @param age         The age of the user
+     * @param dateOfBirth The date of birth of the user
+     * @param city        The city of the user
+     * @param phoneNo     The phone number of the user
+     * @param mail        The email of the user
+     * @param password    The password of the user
+     */
 	public Users(String userID,String firstName,String lastName,int age,String dateOfBirth,String city,String phoneNo,String mail,String password){
 		this.setUserID(userID);
 		this.setAge(age);
@@ -100,7 +130,8 @@ public class Users {
 					int choice = Integer.parseInt(sc.readLine());
 					switch(choice){
 					case 1:
-						AdminDetails admindetails = new AdminDetails(this.getUserID(),this.getPassword());
+						UserDetails admindetails = new AdminDetails(this.getUserID(),this.getPassword());
+						admindetails.showDetails();
 						break;
 					case 2:
 						Admin.viewHall(this.getUserID(),this.getPassword(),this.getCategory());
@@ -141,7 +172,8 @@ public class Users {
 					int choice = Integer.parseInt(sc.readLine());
 					switch(choice){
 					case 1:
-						new HallOwnerDetails(this.getUserID(),this.getPassword());
+						UserDetails ownerDetails = new HallOwnerDetails(this.getUserID(),this.getPassword());
+						ownerDetails.showDetails();
 						break;
 					case 2:
 						HallOwner.viewHallService(this.getUserID(),this.getPassword(),this.getCategory());
@@ -204,7 +236,8 @@ public class Users {
 					int choice = Integer.parseInt(sc.readLine());
 					switch(choice){
 					case 1:
-						new CustomerDetails(this.getUserID(),this.getPassword());
+						UserDetails customerDetails = new CustomerDetails(this.getUserID(),this.getPassword());
+						customerDetails.showDetails();
 						break;
 					case 2:
 						Customers.viewHallService(this.getUserID(),this.getPassword(),this.getCategory());

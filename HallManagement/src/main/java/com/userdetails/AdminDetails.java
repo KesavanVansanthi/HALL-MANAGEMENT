@@ -42,7 +42,7 @@ public class AdminDetails implements UserDetails {
 	public AdminDetails(String userName,String Password) throws IOException {
 		this.setUserName(userName);
 		this.setPassword(Password);
-		this.showDetails();
+		
 		
 	}
 
@@ -80,7 +80,7 @@ public class AdminDetails implements UserDetails {
 				throw new InputInvalidException(Colors.RED+"          --- Invalid Choice ---"+Colors.RESET);
 			}
 		}catch(Exception e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 		}
 		
 		
@@ -127,7 +127,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 2:
@@ -155,7 +155,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 3:
@@ -182,7 +182,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 4:
@@ -207,7 +207,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					
 					break;
@@ -238,7 +238,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 6:
@@ -265,7 +265,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 7:
@@ -292,7 +292,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 8:
@@ -317,7 +317,7 @@ public class AdminDetails implements UserDetails {
 					try {
 						value=sc.readLine().charAt(0);
 					}catch(Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					break;
 				case 9:
@@ -368,7 +368,7 @@ public class AdminDetails implements UserDetails {
 							try {
 								value=sc.readLine().charAt(0);
 							}catch(Exception e) {
-								System.out.println(e);
+								System.out.println(e.getMessage());
 							}
 							
 						}
@@ -392,7 +392,7 @@ public class AdminDetails implements UserDetails {
 				try{
 					value=sc.readLine().charAt(0);
 				}catch(Exception E) {
-					System.out.println();
+					System.out.println(E.getMessage());
 				}
 			}
 		}while(value=='y');

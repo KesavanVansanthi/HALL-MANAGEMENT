@@ -7,6 +7,7 @@ import java.util.*;
 import java.sql.Date;
 import com.Booking.Book;
 import com.DriverPackage.Colors;
+import com.Exceptions.InputInvalidException;
 import com.databaseConnection.ConnectionDb;
 import com.users.Users;
 
@@ -251,7 +252,8 @@ public class BookHall {
 							}
 							break;
 						default :
-							break;
+							throw new InputInvalidException("\n          --- Invalid Input ---");
+							
 						}
 						
 					}catch(Exception e) {

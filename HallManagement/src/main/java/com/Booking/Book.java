@@ -54,6 +54,7 @@ public class Book {
 		int days;
 		try {
 			char val='y';
+			int count=3;
 			do {
 				System.out.print(Colors.YELLOW+"\n          How many Days you want to rent the Hall : "+Colors.RESET);
 				days = Integer.parseInt(sc.readLine());
@@ -74,7 +75,8 @@ public class Book {
 				}else {
 					val='n';
 				}
-			}while(val=='y');
+				count--;
+			}while(val=='y' && count>0);
 			
 			if(event.equalsIgnoreCase("COMMUNITY EVENT")) {
 				validDay = CommunityData.validDays(hallID,days);
@@ -147,8 +149,30 @@ public class Book {
 					System.out.println(Colors.RESET+"\n          Note : "+Colors.RESET+"This Booking will be Deleted ");
 					BookHall.deleteBook(bookingID);
 					
-				}else {
+				}else if(statusIn.equalsIgnoreCase("Booked")) {
 					
+					System.out.println("\n          **************************************");
+					System.out.println(Colors.YELLOW+"               ###  BOOKING ID : "+Colors.RESET+bookingID+Colors.YELLOW+"  ###"+Colors.RESET);
+					System.out.println(Colors.YELLOW+"                   ###  STATUS : "+Colors.RESET+statusIn.toUpperCase()+Colors.YELLOW+"  ###"+Colors.RESET);
+					System.out.println("          **************************************");
+					System.out.println(Colors.CYAN+"\n                --- Already Booked Id ---"+Colors.RESET);
+				} else if(statusIn.equalsIgnoreCase("Refunded")){
+					
+					System.out.println("\n          **************************************");
+					System.out.println(Colors.YELLOW+"               ###  BOOKING ID : "+Colors.RESET+bookingID+Colors.YELLOW+"  ###"+Colors.RESET);
+					System.out.println(Colors.YELLOW+"                   ###  STATUS : "+Colors.RESET+statusIn.toUpperCase()+Colors.YELLOW+"  ###"+Colors.RESET);
+					System.out.println("          **************************************");
+					System.out.println(Colors.BLUE+"\n                --- Booking Refunded ---"+Colors.RESET);
+					
+				} else if(statusIn.equalsIgnoreCase("Cancelled")){
+					
+					System.out.println("\n          **************************************");
+					System.out.println(Colors.YELLOW+"               ###  BOOKING ID : "+Colors.RESET+bookingID+Colors.YELLOW+"  ###"+Colors.RESET);
+					System.out.println(Colors.YELLOW+"                   ###  STATUS : "+Colors.RESET+statusIn.toUpperCase()+Colors.YELLOW+"  ###"+Colors.RESET);
+					System.out.println("          **************************************");
+					System.out.println(Colors.RED+"\n                --- Booking Cancelled ---"+Colors.RESET);
+				}else {
+
 					System.out.println("\n          **************************************");
 					System.out.println(Colors.YELLOW+"               ###  BOOKING ID : "+Colors.RESET+bookingID+Colors.YELLOW+"  ###"+Colors.RESET);
 					System.out.println(Colors.YELLOW+"                   ###  STATUS : "+Colors.RESET+statusIn.toUpperCase()+Colors.YELLOW+"  ###"+Colors.RESET);
@@ -233,6 +257,8 @@ public class Book {
 								}
 							}while(ch=='y');
 							
+						}else if(status.equalsIgnoreCase("Booked")) {
+							System.out.println(Colors.RED+"\n           --- YOU CANNOT BOOK THE BOOKED HALL --- "+Colors.RESET);
 						}else if(status.equalsIgnoreCase("pending")) {
 							System.out.println(Colors.YELLOW+"\n           --- HEY YOU ARE STILL NEED TO WAIT UNTIL THE ADMIN VERIFIES YOUR REQUEST"+Colors.RESET);
 						}

@@ -37,14 +37,14 @@ public class BusinessEvent {
 				chairs=Integer.parseInt(sc.readLine());
 				char val='y';
 				do {
-					System.out.println("          ************************");
-					System.out.println("          * "+Colors.GREEN+" ### Room Types ### "+Colors.RESET+" *");
-					System.out.println("          ************************");
-					System.out.println("\n               1.Premium\n               2.Gold\n               3.Silver");
+					System.out.println("\n\t          ************************");
+					System.out.println("\t          * "+Colors.GREEN+" ### Room Types ### "+Colors.RESET+" *");
+					System.out.println("\t          ************************");
+					System.out.println("\n\t               1.Premium\n\t               2.Gold\n\t               3.Silver");
 					System.out.println("\n          Premium "+Colors.LAVENDER+"->"+Colors.RESET+Colors.YELLOW+" Sofas, Free Serivces & Unlimited Foods "+Colors.RESET);
 					System.out.println("             Gold "+Colors.LAVENDER+"->"+Colors.RESET+Colors.YELLOW+" Chairs with clothes,Cushion & Free Services "+Colors.RESET);
 					System.out.println("           Silver "+Colors.LAVENDER+"->"+Colors.RESET+Colors.YELLOW+" Normal Chairs with Cushion "+Colors.RESET);
-					System.out.print(Colors.YELLOW+"          Choose Your Room Type : "+Colors.RESET);
+					System.out.print(Colors.YELLOW+"\n          Choose Your Room Type : "+Colors.RESET);
 					int choice=Integer.parseInt(sc.readLine());
 					switch(choice) {
 					case 1:
@@ -70,14 +70,14 @@ public class BusinessEvent {
 				System.out.println(Colors.GREEN+"          --- Your Room Type is Allocated as 'SILVER' ---"+Colors.RESET);
 				roomType="SILVER";
 			}
-			System.out.println(Colors.YELLOW+"          Will Your rooms have Projector ? (y/n) :"+Colors.RESET);
+			System.out.print(Colors.YELLOW+"\n          Will Your rooms have Projector ? (y/n) : "+Colors.RESET);
 			char choiceprojector=sc.readLine().charAt(0);
 			if(choiceprojector=='y') {
 				Projector="AVAILABLE";
 			}else{
 				Projector="NOT AVAILABLE";
 			}
-			System.out.println(Colors.YELLOW+"          Will your Hall Have any Wifi-Service ? (y/n) :"+Colors.RESET);
+			System.out.print(Colors.YELLOW+"\n          Will your Hall Have any Wifi-Service ? (y/n) : "+Colors.RESET);
 			char choicewifi=sc.readLine().charAt(0);
 			if(choicewifi=='y') {
 				wifi="AVAILABLE";
@@ -98,22 +98,36 @@ public class BusinessEvent {
 	
 	public BusinessEvent(String userName,String password,String category) {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("\n          Our Bussiness Hall Services Could be Useful for Conducting :-");
-		System.out.println("\n          ************************************************************");
-		System.out.println("          *                 --- "+Colors.GREEN+"Bussiness Meets"+Colors.RESET+" ---                  *");
-		System.out.println("          *                  --- "+Colors.GREEN+"Team Hang Ups"+Colors.RESET+" ---                   *");
-		System.out.println("          *                   --- "+Colors.GREEN+"Conferences"+Colors.RESET+" ---                    *");
-		System.out.println("          ************************************************************");
+		char val='y';
+		int count=3;
+		do {
+			count--;
+			System.out.println("\n          Our Bussiness Hall Services Could be Useful for Conducting :-");
+			System.out.println("\n          ************************************************************");
+			System.out.println("          *                 --- "+Colors.GREEN+"Bussiness Meets"+Colors.RESET+" ---                  *");
+			System.out.println("          *                  --- "+Colors.GREEN+"Team Hang Ups"+Colors.RESET+" ---                   *");
+			System.out.println("          *                   --- "+Colors.GREEN+"Conferences"+Colors.RESET+" ---                    *");
+			System.out.println("          ************************************************************");
 
-		System.out.print(Colors.YELLOW+"\n          Do you want to see Available Services ?(y/n) : "+Colors.RESET);
-		try {
-			char choice = sc.readLine().charAt(0);
-			if(choice=='y') {
-				BusinessData.viewDetails(userName,password,category);
+			System.out.print(Colors.YELLOW+"\n          Do you want to see Available Services ?(y/n) : "+Colors.RESET);
+			try {
+				char choice = sc.readLine().charAt(0);
+				if(choice=='y') {
+					BusinessData.viewDetails(userName,password,category);
+				}else if(choice=='n') {
+					System.out.println(Colors.RED+"\n          --- Press 'y' to choose the Service --- "+Colors.RESET);
+				}else {
+					try {
+						throw new InputInvalidException(Colors.RED+"\n          --- Invalid Choice ---"+Colors.RESET);
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
 			}
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
+		}while(val=='y' && count>0);
+		
 	}
 
 	public BusinessEvent(int chairs, String roomType, String projector, String wifi) {

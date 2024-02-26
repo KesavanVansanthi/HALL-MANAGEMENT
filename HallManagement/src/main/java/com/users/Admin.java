@@ -15,7 +15,11 @@ import com.HallDatabase.UpdateHall;
 import com.enums.Request;
 import com.events.BusinessEvent;
 import com.events.CommunityEvent;
-import com.events.Concerts;
+
+/**
+ * The `Admin` class represents an administrator user of the Hall Management System.
+ * It provides methods for viewing halls, validating booking requests, and updating hall information.
+ */
 
 public class Admin extends Users {
 	
@@ -49,57 +53,101 @@ public class Admin extends Users {
 	public void setBook(BookHall book) {
 		this.book = book;
 	}
+	
+	 /**
+     * Default constructor for the `Admin` class.
+     */
 
 	public Admin() {
 		
 	}
+	
+    /**
+     * Constructor for creating a new `Admin` object with the specified details.
+     *
+     * @param userName The user name of the admin
+     * @param password The password of the admin
+     * @param category The category of the admin
+     * @throws SQLException if there is an error in the SQL query
+     */
+
 	public Admin(String userName,String password,String category) throws SQLException{
 		super(userName,password,category);
 		
 	}	
 	
+	 /**
+     * Displays the hall booking options for the admin.
+     *
+     * @param userName The user name of the admin
+     * @param password The password of the admin
+     * @param category The category of the admin
+     */
+	
 	public static void viewHall(String userName,String password,String category){
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 		char val='y';
+		int count=3;
 		do {
 			try {
-				System.out.println();
-				System.out.println("\n          *****************************************");
-				System.out.println("          *       "+Colors.GREEN+"--- CHOOSE YOUR EVENTS"+Colors.RESET+" ---      *");
-				System.out.println("          *****************************************\n");
-				System.out.println("                 1.Community Event");
-				System.out.println("                 2.Business Event");
-				System.out.print(Colors.YELLOW+"\n          Your Choice : "+Colors.RESET);
-				int choice =Integer.parseInt(sc.readLine());
-				switch(choice){
-					case 1:
-						new CommunityEvent(userName,password,category);
-						System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
-						val=sc.readLine().charAt(0);
-						break;
-					case 2:
-						new BusinessEvent(userName,password,category);
-						System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
-						val=sc.readLine().charAt(0);
-						break;
-					default :
-						val='y';
-						throw new InputInvalidException(Colors.RED+"\n          --- Invalid Choice ---"+Colors.RESET);
-				}
+				count=3;
+				do {
+					count--;
+					System.out.println();
+					System.out.println("\n          *****************************************");
+					System.out.println("          *       "+Colors.GREEN+"--- CHOOSE YOUR EVENTS"+Colors.RESET+" ---      *");
+					System.out.println("          *****************************************\n");
+					System.out.println("                 1.Community Event");
+					System.out.println("                 2.Business Event");
+					System.out.print(Colors.YELLOW+"\n          Your Choice : "+Colors.RESET);
+					int choice =Integer.parseInt(sc.readLine());
+					switch(choice){
+						case 1:
+							new CommunityEvent(userName,password,category);
+							System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
+							val=sc.readLine().charAt(0);
+							break;
+						case 2:
+							new BusinessEvent(userName,password,category);
+							System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
+							val=sc.readLine().charAt(0);
+							break;
+						default :
+							val='y';
+							try {
+								throw new InputInvalidException(Colors.RED+"\n          --- Invalid Choice ---"+Colors.RESET);
+							}catch(Exception e) {
+								System.out.println(e.getMessage());
+							}
+					}
+				}while(val=='y' && count>0);
+				
 			}catch(Exception e)
 			{
-				System.out.println(e);
+				System.out.println(e.getMessage());
 				System.out.print(Colors.YELLOW+"\n          Do you want to continue?(y/n)"+Colors.RESET);
 				try {
 					val=sc.readLine().charAt(0);
 				}catch(Exception E)
 				{
-					System.out.println(E);
+					System.out.println(E.getMessage());
 				}
 			}
 			
 		}while(val=='y');
 	}
+	
+	  /**
+     * Validates a hall booking request.
+     *
+     * @param hall     The hall object
+     * @param userName The user name of the admin
+     * @param password The password of the admin
+     * @param event    The event type
+     * @throws HallInvalidException   if the hall is invalid
+     * @throws IOException            if there is an I/O error
+     * @throws SQLException           if there is an error in the SQL query
+     */
 	
 	public void requesValidate(Hall hall,String userName,String password,int event) throws HallInvalidException, IOException, SQLException {
 		this.setHall(hall);
@@ -151,7 +199,16 @@ public class Admin extends Users {
 	public void setHall(Hall hall) {
 		this.hall = hall;
 	}
-
+	
+	 /**
+     * Updates hall information based on the specified choice and new value.
+     *
+     * @param choice The choice of information to update
+     * @param newValue The new value for the information
+     * @param hallID The ID of the hall
+     * @throws SQLException if there is an error in the SQL query
+     */
+	
 	public static void updateHall(int choice,Object newValue,String hallID) throws SQLException {
 		
 		switch(choice) {
@@ -186,6 +243,14 @@ public class Admin extends Users {
 		}
 		
 	}
+	
+	/**
+     * Verifies a hall booking request.
+     *
+     * @param userName The user name of the admin
+     * @param password The password of the admin
+     * @throws InvalidBookingException if the booking is invalid
+     */
 	
 	public static void verifyBooking(String userName,String password) throws InvalidBookingException {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));

@@ -40,7 +40,6 @@ public class HallOwnerDetails implements UserDetails{
 	public HallOwnerDetails(String userName,String Password) throws IOException {
 		this.setUserName(userName);
 		this.setPassword(Password);
-		this.showDetails();
 		
 	}
 
@@ -78,7 +77,7 @@ public class HallOwnerDetails implements UserDetails{
 				throw new InputInvalidException(Colors.RED+"          --- Invalid Choice ---"+Colors.RESET);
 			}
 		}catch(Exception e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 		}
 		
 		
@@ -123,7 +122,7 @@ public class HallOwnerDetails implements UserDetails{
 						try {
 							value=sc.readLine().charAt(0);
 						}catch(Exception e) {
-							System.out.println(e);
+							System.out.println(e.getMessage());
 						}
 					}while(val=='y');
 					
@@ -149,7 +148,7 @@ public class HallOwnerDetails implements UserDetails{
 							try {
 								value=sc.readLine().charAt(0);
 							}catch(Exception e) {
-								System.out.println(e);
+								System.out.println(e.getMessage());
 							}
 						}
 						
@@ -176,7 +175,7 @@ public class HallOwnerDetails implements UserDetails{
 							try {
 								value=sc.readLine().charAt(0);
 							}catch(Exception e) {
-								System.out.println(e);
+								System.out.println(e.getMessage());
 							}
 						}
 						
@@ -197,7 +196,7 @@ public class HallOwnerDetails implements UserDetails{
 								try {
 									value=sc.readLine().charAt(0);
 								}catch(Exception e) {
-									System.out.println(e);
+									System.out.println(e.getMessage());
 								}
 						}catch(Exception e) {
 							val='y';
@@ -233,7 +232,7 @@ public class HallOwnerDetails implements UserDetails{
 						try {
 							value=sc.readLine().charAt(0);
 						}catch(Exception e) {
-							System.out.println(e);
+							System.out.println(e.getMessage());
 						}
 					}while(val=='y');
 					
@@ -258,7 +257,7 @@ public class HallOwnerDetails implements UserDetails{
 							try {
 								value=sc.readLine().charAt(0);
 							}catch(Exception e) {
-								System.out.println(e);
+								System.out.println(e.getMessage());
 							}
 						}
 						
@@ -285,7 +284,7 @@ public class HallOwnerDetails implements UserDetails{
 							try {
 								value=sc.readLine().charAt(0);
 							}catch(Exception e) {
-								System.out.println(e);
+								System.out.println(e.getMessage());
 							}
 						}
 						
@@ -312,7 +311,7 @@ public class HallOwnerDetails implements UserDetails{
 						try {
 							value=sc.readLine().charAt(0);
 						}catch(Exception e) {
-							System.out.println(e);
+							System.out.println(e.getMessage());
 						}
 					}while(val=='y');
 					
@@ -358,7 +357,7 @@ public class HallOwnerDetails implements UserDetails{
 											try {
 												value=sc.readLine().charAt(0);
 											}catch(Exception e) {
-												System.out.println(e);
+												System.out.println(e.getMessage());
 											}
 											val='n';
 										}
@@ -389,7 +388,7 @@ public class HallOwnerDetails implements UserDetails{
 				try{
 					value=sc.readLine().charAt(0);
 				}catch(Exception E) {
-					System.out.println();
+					System.out.println(E.getMessage());
 				}
 			}
 		}while(value=='y');

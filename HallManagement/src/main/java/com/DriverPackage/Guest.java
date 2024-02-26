@@ -1,21 +1,26 @@
 package com.DriverPackage;
 import com.Exceptions.InputInvalidException;
-import com.enums.CATEGORY;
-import com.threads.ReassignDays;
-import com.users.Admin;
-import com.users.Customers;
-import com.users.HallOwner;
 import com.validation.*;
 import java.io.*;
-import java.util.Locale.Category;
 
 /**
+ * This class represents the main entry point for the Hall Management System. 
+ * It provides options for administrators, customers, and hall owners to login 
+ * or register, and manages the flow of the application based on user input.
  * 
- * 
+ * @author Kesavan Saravanan Expleo
  * 
  */
 
 public class Guest {
+    /**
+     * The main method of the application.
+     * It displays a welcome message and presents options for different user roles.
+     *
+     * @throws NumberFormatException    if there is an error converting a string to a number
+     * @throws IOException              if there is an I/O error
+     * @throws InputInvalidException    if the user enters an invalid input
+     */
 	public static void main(String[] args) throws NumberFormatException, IOException, InputInvalidException {
 		BufferedReader sc = new  BufferedReader(new InputStreamReader(System.in));
 		
@@ -50,9 +55,12 @@ public class Guest {
 				System.out.print(Colors.YELLOW+"\n          Your Option (1/2/3/4) : "+Colors.RESET);
 				char option=sc.readLine().charAt(0);
 				char go='y';
+				int count=3;
 				switch(option) {
 				case '1':
+					count=3;
 					do {
+						count--;
 						System.out.println("\n               --- PRESS '1' to "+Colors.PURPLE+"LOGIN"+Colors.RESET+" ---\n");
 						System.out.println("                        +-------+  ");
 						System.out.println("                        |"+Colors.PURPLE+" LOGIN "+Colors.RESET+"|  ");
@@ -72,12 +80,14 @@ public class Guest {
 							}
 							
 						}
-					}while(go=='y');
+						
+					}while(go=='y' && count>0);
 					
 					break;
 				case '2':
-					
+					count=3;
 					do {
+						count--;
 						System.out.println("\n               --- PRESS '1' to"+Colors.PURPLE+" LOGIN "+Colors.RESET+"---\n");
 						System.out.println("\n                        +-------+  ");
 						System.out.println("                        |"+Colors.PURPLE+" LOGIN "+Colors.RESET+"|  ");
@@ -103,10 +113,12 @@ public class Guest {
 								System.out.println(e.getMessage());
 							}
 						}
-					}while(go=='y');
+					}while(go=='y' && count>0);
 					break;
 				case '3':
+					count=3;
 					do {
+						count--;
 						System.out.println("\n               --- PRESS '1' to"+Colors.PURPLE+" LOGIN "+Colors.RESET+"---\n");
 						System.out.println("\n                        +-------+  ");
 						System.out.println("                        |"+Colors.PURPLE+" LOGIN "+Colors.RESET+"|  ");
@@ -126,19 +138,24 @@ public class Guest {
 							new Register();
 							break;
 						default :
+							
 							try {
 								throw new InputInvalidException(Colors.RED+"          --- Invalid Choice ---"+Colors.RESET);
 							}catch(Exception e) {
 								System.out.println(e.getMessage());
 							}
 						}
-					}while(go=='y');
+					}while(go=='y' && count>0);
 					break;
 				case '4':
 					choice='n';
 					break;
 				default :
-					throw new InputInvalidException(Colors.RED+"          --- Invalid Choice ---"+Colors.RESET);
+					try {
+						throw new InputInvalidException(Colors.RED+"          --- Invalid Choice ---"+Colors.RESET);
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				
 				if(go=='n') {

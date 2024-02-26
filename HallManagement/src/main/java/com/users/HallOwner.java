@@ -11,6 +11,11 @@ import com.events.BusinessEvent;
 import com.events.CommunityEvent;
 import com.events.Concerts;
 
+/**
+ * The `HallOwner` class represents a hall owner user of the Hall Management System.
+ * It provides methods for viewing hall services, adding halls, viewing and updating owned halls.
+ */
+
 public class HallOwner extends Users {
 	String Events;
 	BusinessEvent Business;
@@ -19,52 +24,87 @@ public class HallOwner extends Users {
 		
 	}
 	
+	  /**
+     * Constructor for creating a new `HallOwner` object with the specified details.
+     *
+     * @param userName The user name of the hall owner
+     * @param password The password of the hall owner
+     * @param category The category of the hall owner
+     * @throws SQLException if there is an error in the SQL query
+     */
+	
 	public HallOwner(String userName,String password,String category) throws SQLException {
 		super(userName,password,category);
 	}
 	
+	 /**
+     * Displays the hall services for the hall owner to choose from.
+     *
+     * @param userName The user name of the hall owner
+     * @param password The password of the hall owner
+     * @param category The category of the hall owner
+     */
+	
 	public static void viewHallService(String userName, String password,String category) {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 		char val='y';
+		int count=3;
 		do {
 			try {
-				System.out.println();
-				System.out.println("\n          *****************************************");
-				System.out.println("          *       "+Colors.GREEN+"--- CHOOSE YOUR EVENTS"+Colors.RESET+" ---      *");
-				System.out.println("          *****************************************\n");
-				System.out.println("                 1.Community Event");
-				System.out.println("                 2.Business Event");
-				System.out.print(Colors.YELLOW+"\n          Your Choice : "+Colors.RESET);
-				int choice =Integer.parseInt(sc.readLine());
-				switch(choice){
-					case 1:
-						new CommunityEvent(userName,password,category);
-						System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
-						val=sc.readLine().charAt(0);
-						break;
-					case 2:
-						new BusinessEvent(userName,password,category);
-						System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
-						val=sc.readLine().charAt(0);
-						break;
-					default :
-						val='y';
-						throw new InputInvalidException(Colors.RED+"\n          --- Invalid Choice ---"+Colors.RESET);
-				}
+				count=3;
+				do {
+					count--;
+					System.out.println();
+					System.out.println("\n          *****************************************");
+					System.out.println("          *       "+Colors.GREEN+"--- CHOOSE YOUR EVENTS"+Colors.RESET+" ---      *");
+					System.out.println("          *****************************************\n");
+					System.out.println("                 1.Community Event");
+					System.out.println("                 2.Business Event");
+					System.out.print(Colors.YELLOW+"\n          Your Choice : "+Colors.RESET);
+					int choice =Integer.parseInt(sc.readLine());
+					switch(choice){
+						case 1:
+							new CommunityEvent(userName,password,category);
+							System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
+							val=sc.readLine().charAt(0);
+							break;
+						case 2:
+							new BusinessEvent(userName,password,category);
+							System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
+							val=sc.readLine().charAt(0);
+							break;
+						default :
+							val='y';
+							try {
+								throw new InputInvalidException(Colors.RED+"\n          --- Invalid Choice ---"+Colors.RESET);
+							}catch(Exception e) {
+								System.out.println(e.getMessage());
+							}
+					}
+				}while(val=='y' && count>0);
+				
 			}catch(Exception e)
 			{
-				System.out.println(e);
+				System.out.println(e.getMessage());
 				System.out.print(Colors.YELLOW+"\n          Do you want to book again ?(y/n) : "+Colors.RESET);
 				try {
 					val=sc.readLine().charAt(0);
 				}catch(Exception E)
 				{
-					System.out.println(E);
+					System.out.println(E.getMessage());
 				}
 			}
 			
 		}while(val=='y');
 	}
+	
+    /**
+     * Adds a new hall for the hall owner.
+     *
+     * @param userName The user name of the hall owner
+     * @param password The password of the hall owner
+     * @throws HallInvalidException if the hall is invalid
+     */
 	
 	public void addHall(String userName,String password)throws HallInvalidException {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
@@ -92,7 +132,7 @@ public class HallOwner extends Users {
 			int interest=Integer.parseInt(sc.readLine());
 			System.out.print(Colors.YELLOW+"\n          Is your Hall Is Appilicable for  the Below Events : "+Colors.RESET+
 								"\n            1.Community Event \n            2.Business Events \n");
-			System.out.println(Colors.ORANGE+"          If So, Enter their Number (1/2) : "+Colors.RESET);
+			System.out.print(Colors.ORANGE+"          If So, Enter their Number (1/2) : "+Colors.RESET);
 			
 			int choice =Integer.parseInt(sc.readLine());
 			if(choice==2) {
@@ -120,6 +160,17 @@ public class HallOwner extends Users {
 		}
 		
 	}
+	
+	 /**
+     * Views and manages owned halls for the hall owner.
+     *
+     * @param userName The user name of the hall owner
+     * @param password The password of the hall owner
+     * @throws NumberFormatException if a number format is invalid
+     * @throws IOException           if there is an I/O error
+     * @throws HallInvalidException  if the hall is invalid
+     * @throws SQLException          if there is an error in the SQL query
+     */
 	
 	public void viewHall(String userName,String password) throws NumberFormatException, IOException, HallInvalidException, SQLException {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
@@ -158,6 +209,14 @@ public class HallOwner extends Users {
 		
 	}
 	
+	 /**
+     * Deletes a hall owned by the hall owner.
+     *
+     * @param hallID The ID of the hall to delete
+     * @throws IOException  if there is an I/O error
+     * @throws SQLException if there is an error in the SQL query
+     */
+	
 	public static void deleteHall(String hallID) throws IOException, SQLException {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(Colors.YELLOW+"          Do you Want to Delete Hall : "+hallID+" ?(y/n) :"+Colors.RESET);
@@ -169,6 +228,16 @@ public class HallOwner extends Users {
 		
 		
 	}
+	
+	 /**
+     * Updates information of a hall owned by the hall owner.
+     *
+     * @param hallID The ID of the hall to update
+     * @throws NumberFormatException if a number format is invalid
+     * @throws IOException           if there is an I/O error
+     * @throws HallInvalidException  if the hall is invalid
+     * @throws SQLException          if there is an error in the SQL query
+     */
 	
 	public void updateHall(String hallID) throws NumberFormatException, IOException, HallInvalidException, SQLException {
 		BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));

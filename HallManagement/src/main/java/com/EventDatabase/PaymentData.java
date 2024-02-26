@@ -41,10 +41,10 @@ public class PaymentData {
 					System.out.println("             | "+Colors.GREEN+"--- Enter the Mode Of Transaction ---"+Colors.RESET+" |");
 					System.out.println("             +---------------------------------------+");
 					System.out.println("             |              1.Gpay                   |"
-							+ "\n                    |              2.Credit Card            |"
-							+ "\n                    |              3.Onsite Payment         |"
-							+ "\n                    +---------------------------------------+");
-					System.out.println(Colors.YELLOW+"\n          Enter Your Choice : "+Colors.RESET);
+							         + "\n             |              2.Credit Card            |"
+							         + "\n             |              3.Onsite Payment         |"
+							         + "\n             +---------------------------------------+");
+					System.out.print(Colors.YELLOW+"\n          Enter Your Choice : "+Colors.RESET);
 					int mode =Integer.parseInt(sc.readLine());
 					switch(mode) {
 					case 1:
@@ -76,10 +76,10 @@ public class PaymentData {
 					System.out.println("             | "+Colors.GREEN+"--- Enter the Mode Of Transaction ---"+Colors.RESET+" |");
 					System.out.println("             +---------------------------------------+");
 					System.out.println("             |              1.Gpay                   |"
-							         + "\n           |              2.Credit Card            |"
-							         + "\n           |              3.Onsite Payment         |"
-							         + "\n           +---------------------------------------+");
-					System.out.println(Colors.YELLOW+"\n          Enter Your Choice : "+Colors.RESET);
+							         + "\n             |              2.Credit Card            |"
+							         + "\n             |              3.Onsite Payment         |"
+							         + "\n             +---------------------------------------+");
+					System.out.print(Colors.YELLOW+"\n          Enter Your Choice : "+Colors.RESET);
 					int mode =Integer.parseInt(sc.readLine());
 					switch(mode) {
 					case 1:
